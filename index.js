@@ -1,5 +1,20 @@
 import fs from 'fs/promises'
 
 console.log("hi")
-const foo =()=> {console.log(`hello world`);}
-foo()
+
+import mongoose from 'mongoose';
+import 'dotenv/config';
+
+const { DB_HOST, PORT } = process.env;
+
+mongoose
+  .connect(DB_HOST)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log('Database connection successful');
+    });
+  })
+  .catch((error) => {
+    console.log(error.message);
+    process.exit(1);
+  });
